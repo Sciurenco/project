@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+        <changeSet id="user_01" author="serghei">
+            <preConditions onFail = "MARK_RAN">
+                <not>
+                    <tableExists tableName="users"/>
+                </not>
+            </preConditions>
+
+            <createTable tableName="users">
+                <column name="id" type="int" autoIncrement="true">
+                    <constraints primaryKey="true" nullable="false"/>
+                </column>
+                <column name="login" type="varchar(32)">
+                    <constraints nullable="false" unique="false"/>
+                </column>
+                <column name="password" type="varchar(32)">
+                    <constraints nullable="false"/>
+                </column>
+                <column name="role" type="varchar(32)"/>
+            </createTable>
+        </changeSet>
+
+        <changeSet id="personal_data_01" author="serghei">
+            <preConditions onFail = "MARK_RAN">
+                <not>
+                <tableExists tableName="personal_data"/>
+                </not>
+            </preConditions>
+
+            <createTable tableName="personal_data">
+                <column name="user_id" type="bigint">
+                    <constraints unique="true" primaryKey="true" nullable="false"/>
+                </column>
+                <column name="name" type="varchar(32)"/>
+                <column name="surname" type="varchar(32)"/>
+                <column name="gender" type="char(1)"/>
+                <column name="date_of_birth" type="date"/>
+            </createTable>
+        </changeSet>
+
+        <changeSet id="foreign_key_user_personal_data_01" author="serghei">
+            <addForeignKeyConstraint baseTableName="personal_data"
+                                     baseColumnNames="user_id"
+                                     referencedTableName="users"
+                                     referencedColumnNames="id"
+                                     constraintName="fk_user_personal_data"
+                                     onDelete="CASCADE"
+                                     onUpdate="CASCADE"/>
+        </changeSet>
+</databaseChangeLog>
