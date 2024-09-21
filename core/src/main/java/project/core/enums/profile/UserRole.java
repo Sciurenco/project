@@ -1,4 +1,4 @@
-package project.core.enums.indentification;
+package project.core.enums.profile;
 
 
 public enum UserRole {
@@ -7,6 +7,7 @@ public enum UserRole {
     USER,
     PREMIUM_USER,
     GUEST,
+    CLIENT,
     DEVELOPER,
     OWNER
 }

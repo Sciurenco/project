@@ -18,11 +18,14 @@ public class PersonalData {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "user_id", unique = true)
     private User user;
     private String name;
     private String surname;
-    private Character gender;
+    private String gender;
     private LocalDate dateOfBirth;
+    private String email;
+    private String phoneNumber;
+
 }

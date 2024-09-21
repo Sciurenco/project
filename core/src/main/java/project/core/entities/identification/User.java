@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import project.core.enums.indentification.UserRole;
+import project.core.enums.profile.UserRole;
 
 @Builder
 @AllArgsConstructor

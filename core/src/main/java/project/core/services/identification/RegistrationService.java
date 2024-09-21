@@ -7,14 +7,14 @@ import org.springframework.transaction.annotation.Transactional;
 import project.core.dto.identification.UserDTO;
 import project.core.entities.identification.PersonalData;
 import project.core.entities.identification.User;
-import project.core.enums.indentification.UserRole;
-import project.core.repositories.identification.UserRepository;
+import project.core.enums.profile.UserRole;
+import project.core.repositories.profile.UserRepository;
 
 import java.util.Base64;
 
 @Service
 @Data
-public class UserService {
+public class RegistrationService {
 
     @Autowired
     private UserRepository userRepository;
@@ -31,6 +31,8 @@ public class UserService {
                         .surname(userDTO.getPersonalData().getSurname())
                         .gender(userDTO.getPersonalData().getGender())
                         .dateOfBirth(userDTO.getPersonalData().getDateOfBirth())
+                        .email(userDTO.getPersonalData().getEmail())
+                        .phoneNumber(userDTO.getPersonalData().getPhoneNumber())
                         .build())
                 .build();
 

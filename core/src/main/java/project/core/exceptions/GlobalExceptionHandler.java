@@ -17,7 +17,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(ValidationException.class)
     @ResponseBody
-    public ResponseEntity<ErrorResponse> handleRegistrationException(ConstraintViolationException e) {
+    public ResponseEntity<ErrorResponse> handleConstraintViolationException(ConstraintViolationException e) {
 
         ErrorResponse errorResponse = new ErrorResponse("BAD_REQUEST", stringFix(e.getMessage()));
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
@@ -38,7 +38,6 @@ public class GlobalExceptionHandler {
         ErrorResponse errorResponse = new ErrorResponse("BAD_REQUEST", stringFix(e.getMessage()));
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
-
 
     @Setter
     @Getter

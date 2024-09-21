@@ -3,10 +3,10 @@
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
-        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
         <changeSet id="user_01" author="serghei">
-            <preConditions onFail = "MARK_RAN">
+            <preConditions onFail="MARK_RAN">
                 <not>
                     <tableExists tableName="users"/>
                 </not>
@@ -27,9 +27,9 @@
         </changeSet>
 
         <changeSet id="personal_data_01" author="serghei">
-            <preConditions onFail = "MARK_RAN">
+            <preConditions onFail="MARK_RAN">
                 <not>
-                <tableExists tableName="personal_data"/>
+                    <tableExists tableName="personal_data"/>
                 </not>
             </preConditions>
 
@@ -41,6 +41,8 @@
                 <column name="surname" type="varchar(32)"/>
                 <column name="gender" type="char(1)"/>
                 <column name="date_of_birth" type="date"/>
+                <column name="email" type="varchar(32)"/>
+                <column name="phone_number" type="varchar(16)"/>
             </createTable>
         </changeSet>
 
