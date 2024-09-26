@@ -1,4 +1,4 @@
-package project.core.dto.identification;
+package project.core.dto.profile;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;

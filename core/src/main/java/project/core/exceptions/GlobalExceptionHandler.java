@@ -1,5 +1,6 @@
 package project.core.exceptions;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.ValidationException;
 import lombok.Getter;
@@ -10,16 +11,20 @@ import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
-import project.core.exceptions.indentification.RegistrationException;
+import project.core.exceptions.profile.PersonalDataException;
+import project.core.exceptions.profile.UserException;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
+
+    private static final String BAD_REQUEST = "BAD_REQUEST";
+    private static final String NOT_FOUND = "NOT_FOUND";
 
     @ExceptionHandler(ValidationException.class)
     @ResponseBody
     public ResponseEntity<ErrorResponse> handleConstraintViolationException(ConstraintViolationException e) {
 
-        ErrorResponse errorResponse = new ErrorResponse("BAD_REQUEST", stringFix(e.getMessage()));
+        ErrorResponse errorResponse = new ErrorResponse(BAD_REQUEST, stringFix(e.getMessage()));
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
@@ -27,16 +32,32 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public ResponseEntity<ErrorResponse> handleHttpMessageNotReadableException(HttpMessageNotReadableException e) {
 
-        ErrorResponse errorResponse = new ErrorResponse("BAD_REQUEST",  "Invalid role. Allowed values are: " + stringFix(e.getMessage()));
+        ErrorResponse errorResponse = new ErrorResponse(BAD_REQUEST,  "Invalid role. Allowed values are: " + stringFix(e.getMessage()));
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(RegistrationException.class)
+    @ExceptionHandler(UserException.class)
     @ResponseBody
-    public ResponseEntity<ErrorResponse> handleRegistrationException(RegistrationException e) {
+    public ResponseEntity<ErrorResponse> handleUserException(UserException e) {
 
-        ErrorResponse errorResponse = new ErrorResponse("BAD_REQUEST", stringFix(e.getMessage()));
+        ErrorResponse errorResponse = new ErrorResponse(BAD_REQUEST, stringFix(e.getMessage()));
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(PersonalDataException.class)
+    @ResponseBody
+    public ResponseEntity<ErrorResponse> handlePersonalDataException(PersonalDataException e) {
+
+        ErrorResponse errorResponse = new ErrorResponse(BAD_REQUEST, stringFix(e.getMessage()));
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    @ResponseBody
+    public ResponseEntity<ErrorResponse> handleEntityNotFoundException(EntityNotFoundException e) {
+
+        ErrorResponse errorResponse = new ErrorResponse(NOT_FOUND, stringFix(e.getMessage()));
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
 
     @Setter

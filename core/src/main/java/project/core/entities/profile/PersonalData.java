@@ -1,5 +1,6 @@
-package project.core.entities.identification;
+package project.core.entities.profile;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,6 +19,8 @@ public class PersonalData {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @JsonBackReference
     @OneToOne
     @JoinColumn(name = "user_id", unique = true)
     private User user;

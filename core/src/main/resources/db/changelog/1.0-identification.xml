@@ -34,9 +34,10 @@
             </preConditions>
 
             <createTable tableName="personal_data">
-                <column name="user_id" type="bigint">
+                <column name="id" type="bigint" autoIncrement="true">
                     <constraints unique="true" primaryKey="true" nullable="false"/>
                 </column>
+                <column name="user_id" type="bigint"/>
                 <column name="name" type="varchar(32)"/>
                 <column name="surname" type="varchar(32)"/>
                 <column name="gender" type="char(1)"/>

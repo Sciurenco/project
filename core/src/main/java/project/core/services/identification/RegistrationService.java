@@ -4,9 +4,9 @@ import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import project.core.dto.identification.UserDTO;
-import project.core.entities.identification.PersonalData;
-import project.core.entities.identification.User;
+import project.core.dto.profile.UserDTO;
+import project.core.entities.profile.PersonalData;
+import project.core.entities.profile.User;
 import project.core.enums.profile.UserRole;
 import project.core.repositories.profile.UserRepository;
 
@@ -20,7 +20,7 @@ public class RegistrationService {
     private UserRepository userRepository;
 
     @Transactional
-    public void saveUser(UserDTO userDTO) {
+    public String saveUser(UserDTO userDTO) {
 
         User user = User.builder()
                 .login(userDTO.getLogin())
@@ -37,9 +37,9 @@ public class RegistrationService {
                 .build();
 
         user.getPersonalData().setUser(user);
-
         userRepository.save(user);
 
+        return "User saved successfully";
     }
 
     public String encodePassword(String password) {

@@ -1,4 +1,4 @@
-package project.core.dto.identification;
+package project.core.dto.profile;
 
 import jakarta.validation.constraints.*;
 import lombok.Data;

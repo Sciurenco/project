@@ -1,6 +1,5 @@
 package project.core.enums.profile;
 
-
 public enum UserRole {
     ADMINISTRATOR,
     MODERATOR,

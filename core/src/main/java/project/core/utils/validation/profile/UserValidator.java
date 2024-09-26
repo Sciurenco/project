@@ -1,10 +1,10 @@
-package project.core.utils.profile;
+package project.core.utils.validation.profile;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-import project.core.dto.identification.UserDTO;
+import project.core.dto.profile.UserDTO;
 import project.core.enums.profile.UserRole;
 import project.core.repositories.profile.UserRepository;
 
@@ -29,7 +29,7 @@ public class UserValidator implements Validator {
             errors.rejectValue("login", "login.exists", "This login is already used");
         }
 
-        if (!List.of(UserRole.values()).contains(user.getRole())) {
+        if (user.getRole() != null && !List.of(UserRole.values()).contains(user.getRole())) {
             errors.rejectValue("role", "role.invalid", "This role is not valid");
         }
 

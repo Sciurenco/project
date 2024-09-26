@@ -7,16 +7,16 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import project.core.dto.identification.UserDTO;
-import project.core.exceptions.indentification.RegistrationException;
+import project.core.dto.profile.UserDTO;
+import project.core.exceptions.profile.UserException;
 import project.core.services.identification.RegistrationService;
-import project.core.utils.profile.PersonalDataValidator;
-import project.core.utils.profile.UserValidator;
+import project.core.utils.validation.profile.PersonalDataValidator;
+import project.core.utils.validation.profile.UserValidator;
 
 @Validated
 @RestController
 @RequestMapping("/registration")
-public class Registration {
+public class RegistrationController {
 
     @Autowired
     private UserValidator userValidator;
@@ -40,10 +40,9 @@ public class Registration {
         personalDataValidator.validate(user, result);
 
         if (result.hasErrors()) {
-            throw new RegistrationException(result.getFieldError().getDefaultMessage());
+            throw new UserException(result.getFieldError().getDefaultMessage());
         } else {
-            registrationService.saveUser(user);
-            return ResponseEntity.ok("user saved successfully");
+            return ResponseEntity.ok(registrationService.saveUser(user));
         }
     }
 
@@ -54,10 +53,9 @@ public class Registration {
         personalDataValidator.validate(user, result);
 
         if (result.hasErrors()) {
-            throw new RegistrationException(result.getFieldError().getDefaultMessage());
+            throw new UserException(result.getFieldError().getDefaultMessage());
         } else {
-            registrationService.saveUser(user);
-            return ResponseEntity.ok("user saved successfully");
+            return ResponseEntity.ok( registrationService.saveUser(user));
         }
     }
 
