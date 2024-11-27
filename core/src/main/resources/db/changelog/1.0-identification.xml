@@ -19,7 +19,7 @@
                 <column name="login" type="varchar(32)">
                     <constraints nullable="false" unique="false"/>
                 </column>
-                <column name="password" type="varchar(32)">
+                <column name="password" type="varchar">
                     <constraints nullable="false"/>
                 </column>
                 <column name="role" type="varchar(32)"/>

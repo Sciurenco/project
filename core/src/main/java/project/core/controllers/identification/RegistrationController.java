@@ -39,11 +39,11 @@ public class RegistrationController {
         userValidator.validate(user, result);
         personalDataValidator.validate(user, result);
 
-        if (result.hasErrors()) {
+        if (result.hasErrors())
             throw new UserException(result.getFieldError().getDefaultMessage());
-        } else {
+        else
             return ResponseEntity.ok(registrationService.saveUser(user));
-        }
+
     }
 
     @PostMapping("/form")
@@ -52,11 +52,11 @@ public class RegistrationController {
         userValidator.validate(user, result);
         personalDataValidator.validate(user, result);
 
-        if (result.hasErrors()) {
+        if (result.hasErrors())
             throw new UserException(result.getFieldError().getDefaultMessage());
-        } else {
-            return ResponseEntity.ok( registrationService.saveUser(user));
-        }
+        else
+            return ResponseEntity.ok(registrationService.saveUser(user));
+
     }
 
 }

@@ -29,7 +29,7 @@ public class PersonalDataController {
 
     @GetMapping("/get/{id}")
     public ResponseEntity<PersonalData> getPersonalData(@PathVariable("id") long userId) {
-       return ResponseEntity.ok(personalDataService.getPersonalData(userId));
+        return ResponseEntity.ok(personalDataService.getPersonalData(userId));
     }
 
     @PatchMapping("update/{id}")
@@ -38,11 +38,10 @@ public class PersonalDataController {
 
         personalDataValidator.validate(personalData, result);
 
-        if (result.hasErrors()) {
+        if (result.hasErrors())
             throw new PersonalDataException(result.getFieldError().getDefaultMessage());
-        } else {
+        else
             return ResponseEntity.ok(personalDataService.updatePersonalData(personalData, id));
-        }
     }
 
     @DeleteMapping("delete/{id}")

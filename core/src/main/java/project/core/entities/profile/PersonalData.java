@@ -21,7 +21,7 @@ public class PersonalData {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @JsonBackReference
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", unique = true)
     private User user;
     private String name;

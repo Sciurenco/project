@@ -29,7 +29,7 @@ public class UserController {
 
     @GetMapping("/get/{id}")
     public ResponseEntity<User> getUser(@PathVariable("id") long id) {
-       return ResponseEntity.ok(userService.getUser(id));
+        return ResponseEntity.ok(userService.getUser(id));
     }
 
     @PatchMapping("update/{id}")
@@ -37,11 +37,11 @@ public class UserController {
                                              @Validated @RequestBody UserDTO user, BindingResult result) {
 
         userValidator.validate(user, result);
-        if (result.hasErrors()) {
+        if (result.hasErrors())
             throw new UserException(result.getFieldError().getDefaultMessage());
-        } else {
+        else
             return ResponseEntity.ok(userService.updateUser(user, id));
-        }
+
     }
 
     @DeleteMapping("delete/{id}")

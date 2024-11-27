@@ -2,6 +2,7 @@ package project.core.services.identification;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import project.core.dto.profile.UserDTO;
@@ -10,8 +11,6 @@ import project.core.entities.profile.User;
 import project.core.enums.profile.UserRole;
 import project.core.repositories.profile.UserRepository;
 
-import java.util.Base64;
-
 @Service
 @Data
 public class RegistrationService {
@@ -19,12 +18,15 @@ public class RegistrationService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Transactional
     public String saveUser(UserDTO userDTO) {
 
         User user = User.builder()
                 .login(userDTO.getLogin())
-                .password(encodePassword(userDTO.getPassword()))
+                .password(passwordEncoder.encode(userDTO.getPassword()))
                 .role(UserRole.USER)
                 .personalData(PersonalData.builder()
                         .name(userDTO.getPersonalData().getName())
@@ -40,9 +42,5 @@ public class RegistrationService {
         userRepository.save(user);
 
         return "User saved successfully";
-    }
-
-    public String encodePassword(String password) {
-        return Base64.getEncoder().encodeToString(password.getBytes());
     }
 }

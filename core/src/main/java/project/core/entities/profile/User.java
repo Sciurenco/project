@@ -26,7 +26,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     private UserRole role;
     @JsonManagedReference
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private PersonalData personalData;
 
 }
