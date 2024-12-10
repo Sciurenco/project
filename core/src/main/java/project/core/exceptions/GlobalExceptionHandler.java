@@ -11,14 +11,15 @@ import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+import project.core.exceptions.admin.RoleException;
 import project.core.exceptions.profile.PersonalDataException;
 import project.core.exceptions.profile.UserException;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    private static final String BAD_REQUEST = "BAD_REQUEST";
-    private static final String NOT_FOUND = "NOT_FOUND";
+    private static final String BAD_REQUEST = HttpStatus.BAD_REQUEST.name();
+    private static final String NOT_FOUND = HttpStatus.NOT_FOUND.name();
 
     @ExceptionHandler(ValidationException.class)
     @ResponseBody
@@ -58,6 +59,14 @@ public class GlobalExceptionHandler {
 
         ErrorResponse errorResponse = new ErrorResponse(NOT_FOUND, stringFix(e.getMessage()));
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(RoleException.class)
+    @ResponseBody
+    public ResponseEntity<ErrorResponse> roleException(RoleException e) {
+
+        ErrorResponse errorResponse = new ErrorResponse(HttpStatus.NOT_ACCEPTABLE.name(), e.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_ACCEPTABLE);
     }
 
     @Setter

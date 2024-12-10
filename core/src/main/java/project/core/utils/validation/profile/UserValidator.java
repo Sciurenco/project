@@ -5,10 +5,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import project.core.dto.profile.UserDTO;
-import project.core.enums.profile.UserRole;
 import project.core.repositories.profile.UserRepository;
-
-import java.util.List;
 
 @Component
 public class UserValidator implements Validator {
@@ -28,10 +25,5 @@ public class UserValidator implements Validator {
         if (userRepository.existsByLogin(user.getLogin())) {
             errors.rejectValue("login", "login.exists", "This login is already used");
         }
-
-        if (user.getRole() != null && !List.of(UserRole.values()).contains(user.getRole())) {
-            errors.rejectValue("role", "role.invalid", "This role is not valid");
-        }
-
      }
 }

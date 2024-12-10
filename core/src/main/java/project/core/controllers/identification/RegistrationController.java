@@ -33,7 +33,7 @@ public class RegistrationController {
         binder.setValidator(personalDataValidator);
     }
 
-    @PostMapping("/api")
+    @PostMapping()
     public ResponseEntity<String> registrationByApi(@Valid @RequestBody UserDTO user, BindingResult result) {
 
         userValidator.validate(user, result);
@@ -43,20 +43,5 @@ public class RegistrationController {
             throw new UserException(result.getFieldError().getDefaultMessage());
         else
             return ResponseEntity.ok(registrationService.saveUser(user));
-
     }
-
-    @PostMapping("/form")
-    public ResponseEntity<String> registrationByForm(@Valid @ModelAttribute UserDTO user, BindingResult result) {
-
-        userValidator.validate(user, result);
-        personalDataValidator.validate(user, result);
-
-        if (result.hasErrors())
-            throw new UserException(result.getFieldError().getDefaultMessage());
-        else
-            return ResponseEntity.ok(registrationService.saveUser(user));
-
-    }
-
 }

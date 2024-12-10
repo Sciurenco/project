@@ -27,7 +27,7 @@ public class RegistrationService {
         User user = User.builder()
                 .login(userDTO.getLogin())
                 .password(passwordEncoder.encode(userDTO.getPassword()))
-                .role(UserRole.USER)
+                .role(UserRole.ROLE_USER)
                 .personalData(PersonalData.builder()
                         .name(userDTO.getPersonalData().getName())
                         .surname(userDTO.getPersonalData().getSurname())

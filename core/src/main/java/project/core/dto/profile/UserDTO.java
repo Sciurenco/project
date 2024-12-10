@@ -5,7 +5,6 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.*;
-import project.core.enums.profile.UserRole;
 
 @Data
 public class UserDTO {
@@ -17,7 +16,6 @@ public class UserDTO {
             "one lower case letter, one uppercase letter, one digit, one special character " +
             "and must be at least 8 characters long")
     private String password;
-    private UserRole role;
     @Valid
     private PersonalDataDTO personalData;
 

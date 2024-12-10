@@ -32,7 +32,7 @@ public class PersonalDataController {
         return ResponseEntity.ok(personalDataService.getPersonalData(userId));
     }
 
-    @PatchMapping("update/{id}")
+    @PatchMapping("/update/{id}")
     public ResponseEntity<String> updatePersonalData(@PathVariable("id") long id,
                                                      @Validated @RequestBody PersonalDataDTO personalData, BindingResult result) {
 
@@ -44,7 +44,7 @@ public class PersonalDataController {
             return ResponseEntity.ok(personalDataService.updatePersonalData(personalData, id));
     }
 
-    @DeleteMapping("delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deletePersonalData(@PathVariable("id") long id) {
         return ResponseEntity.ok(personalDataService.deletePersonalData(id));
     }

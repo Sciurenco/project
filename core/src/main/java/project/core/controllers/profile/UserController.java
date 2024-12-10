@@ -32,7 +32,7 @@ public class UserController {
         return ResponseEntity.ok(userService.getUser(id));
     }
 
-    @PatchMapping("update/{id}")
+    @PatchMapping("/update/{id}")
     public ResponseEntity<String> updateUser(@PathVariable("id") long id,
                                              @Validated @RequestBody UserDTO user, BindingResult result) {
 
@@ -44,7 +44,7 @@ public class UserController {
 
     }
 
-    @DeleteMapping("delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteUser(@PathVariable("id") long id) {
         return ResponseEntity.ok(userService.deleteUser(id));
     }
